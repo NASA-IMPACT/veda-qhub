@@ -1,0 +1,137 @@
+project_name: veda-qhub
+provider: aws
+domain: mysite.com
+certificate:
+  type: lets-encrypt
+  acme_email: alexbush@developmentseed.org
+  acme_server: https://acme-v02.api.letsencrypt.org/directory
+security:
+  authentication:
+    type: GitHub
+    config:
+      client_id: 848655c77c4591711751
+      client_secret: 8a76cabc243621dc8959ec54bd7d80bdd3f77dab
+  keycloak:
+    initial_root_password: pzpaVs04OeM1JZF2
+default_images:
+  jupyterhub: quansight/qhub-jupyterhub:v0.4.3
+  jupyterlab: quansight/qhub-jupyterlab:v0.4.3
+  dask_worker: quansight/qhub-dask-worker:v0.4.3
+storage:
+  conda_store: 200Gi
+  shared_filesystem: 200Gi
+theme:
+  jupyterhub:
+    hub_title: QHub - veda-qhub
+    hub_subtitle: Autoscaling Compute Environment on Amazon Web Services
+    welcome: Welcome to mysite.com. It is maintained by <a href="http://quansight.com">Quansight
+      staff</a>. The hub's configuration is stored in a github repository based on
+      <a href="https://github.com/Quansight/qhub/">https://github.com/Quansight/qhub/</a>.
+      To provide feedback and report any technical problems, please use the <a href="https://github.com/Quansight/qhub/issues">github
+      issue tracker</a>.
+    logo: /hub/custom/images/jupyter_qhub_logo.svg
+    primary_color: '#4f4173'
+    secondary_color: '#957da6'
+    accent_color: '#32C574'
+    text_color: '#111111'
+    h1_color: '#652e8e'
+    h2_color: '#652e8e'
+    version: v0.4.3
+helm_extensions: []
+monitoring:
+  enabled: true
+argo_workflows:
+  enabled: true
+kbatch:
+  enabled: true
+cdsdashboards:
+  enabled: true
+  cds_hide_user_named_servers: true
+  cds_hide_user_dashboard_servers: false
+ci_cd:
+  type: github-actions
+  branch: main
+  commit_render: true
+terraform_state:
+  type: remote
+namespace: dev
+qhub_version: 0.4.3
+amazon_web_services:
+  region: us-west-2
+  kubernetes_version: '1.23'
+  node_groups:
+    general:
+      instance: m5.2xlarge
+      min_nodes: 1
+      max_nodes: 1
+    user:
+      instance: m5.xlarge
+      min_nodes: 1
+      max_nodes: 5
+    worker:
+      instance: m5.xlarge
+      min_nodes: 1
+      max_nodes: 5
+profiles:
+  jupyterlab:
+  - display_name: Small Instance
+    description: Stable environment with 2 cpu / 8 GB ram
+    default: true
+    kubespawner_override:
+      cpu_limit: 2
+      cpu_guarantee: 1.5
+      mem_limit: 8G
+      mem_guarantee: 5G
+  - display_name: Medium Instance
+    description: Stable environment with 4 cpu / 16 GB ram
+    kubespawner_override:
+      cpu_limit: 4
+      cpu_guarantee: 3
+      mem_limit: 16G
+      mem_guarantee: 10G
+  dask_worker:
+    Small Worker:
+      worker_cores_limit: 2
+      worker_cores: 1.5
+      worker_memory_limit: 8G
+      worker_memory: 5G
+      worker_threads: 2
+    Medium Worker:
+      worker_cores_limit: 4
+      worker_cores: 3
+      worker_memory_limit: 16G
+      worker_memory: 10G
+      worker_threads: 4
+environments:
+  environment-dask.yaml:
+    name: dask
+    channels:
+    - conda-forge
+    dependencies:
+    - python
+    - ipykernel
+    - ipywidgets
+    - qhub-dask ==0.4.3
+    - python-graphviz
+    - numpy
+    - numba
+    - pandas
+    - pip:
+      - kbatch
+  environment-dashboard.yaml:
+    name: dashboard
+    channels:
+    - conda-forge
+    dependencies:
+    - python==3.9.7
+    - ipykernel==6.4.1
+    - ipywidgets==7.6.5
+    - qhub-dask==0.4.3
+    - param==1.11.1
+    - python-graphviz==0.17
+    - matplotlib==3.4.3
+    - panel==0.12.7
+    - voila==0.3.5
+    - streamlit==1.0.0
+    - dash==2.0.0
+    - cdsdashboards-singleuser==0.6.1
