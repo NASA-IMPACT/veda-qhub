@@ -68,6 +68,19 @@ amazon_web_services:
       instance: m5.xlarge
       min_nodes: 1
       max_nodes: 5
+jupyterhub:
+  overrides:
+    singleuser:
+      lifecycleHooks:
+        postStart:
+          exec:
+            command:
+              [
+                "gitpuller",
+                "https://github.com/NASA-IMPACT/veda-documentation",
+                "master",
+                "docs",
+             ]
 profiles:
   jupyterlab:
   - display_name: Small Instance
