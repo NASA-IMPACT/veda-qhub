@@ -104,6 +104,7 @@ environments:
     channels:
     - conda-forge
     dependencies:
+    - nbgitpuller
     - python
     - ipykernel
     - ipywidgets
@@ -119,6 +120,7 @@ environments:
     channels:
     - conda-forge
     dependencies:
+    - nbgitpuller
     - python==3.9.7
     - ipykernel==6.4.1
     - ipywidgets==7.6.5
