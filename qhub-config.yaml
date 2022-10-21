@@ -51,7 +51,7 @@ ci_cd:
 terraform_state:
   type: remote
 namespace: dev
-qhub_version: 0.4.3
+qhub_version: 0.4.5
 amazon_web_services:
   region: us-west-2
   kubernetes_version: '1.23'
@@ -74,8 +74,7 @@ jupyterhub:
       lifecycleHooks:
         postStart:
           exec:
-            command:
-              [
+            command: [
                 "gitpuller",
                 "https://github.com/NASA-IMPACT/veda-documentation",
                 "master",
