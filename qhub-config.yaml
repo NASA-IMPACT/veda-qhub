@@ -3,7 +3,7 @@ provider: aws
 domain: veda-analytics.delta-backend.com
 certificate:
   type: lets-encrypt
-  acme_email: alexbush@developmentseed.org
+  acme_email: aimee@developmentseed.org
   acme_server: https://acme-v02.api.letsencrypt.org/directory
 security:
   authentication:
@@ -107,7 +107,7 @@ environments:
     - python
     - ipykernel
     - ipywidgets
-    - qhub-dask ==0.4.5
+    - qhub-dask==0.4.5
     - python-graphviz
     - numpy
     - numba
@@ -132,3 +132,35 @@ environments:
     - streamlit==1.0.0
     - dash==2.0.0
     - cdsdashboards-singleuser==0.6.1
+  environment-veda.yaml:
+    name: veda
+    channels:
+    - conda-forge
+    dependencies:
+    - python==3.9.7
+    - ipykernel==6.4.1
+    - ipywidgets==7.6.5
+    - qhub-dask==0.4.5
+    - param==1.11.1
+    - python-graphviz==0.17
+    - matplotlib==3.4.3
+    - panel==0.12.7
+    - voila==0.3.5
+    - streamlit==1.0.0
+    - dash==2.0.0
+    - sphinx>=1.4
+    - pandoc
+    - nbconvert
+    - ipyleaflet
+    - matplotlib
+    - nbsphinx
+    - rioxarray
+    - pystac-client
+    - sphinxcontrib-napoleon
+    - stackstac
+    - folium
+    - selenium
+    - Pillow
+    - pydantic==1.9.1
+    - boto3==1.24.15
+    - boto3-stubs[cognito-idp,cognito-identity]
