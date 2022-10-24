@@ -129,7 +129,6 @@ environments:
     - matplotlib==3.4.3
     - panel==0.12.7
     - voila==0.3.5
-    - streamlit==1.0.0
     - dash==2.0.0
     - cdsdashboards-singleuser==0.6.1
   environment-veda.yaml:
@@ -146,7 +145,6 @@ environments:
     - matplotlib==3.4.3
     - panel==0.12.7
     - voila==0.3.5
-    - streamlit==1.0.0
     - dash==2.0.0
     - sphinx>=1.4
     - pandoc
