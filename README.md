@@ -42,7 +42,8 @@ If this doesn't work, you can find in AWS the following resources which should b
 1. Destroy the EKS cluster node groups
 2. Destroy the EKS cluster
 3. Destroy the load balancers
-4. Destroy the EFS
-5. Destroy the VPC (this should delete associated subnets and elastic network interfaces)
-6. Destroy the AWS resource group
-7. Destroy the ECR repository "
+4. Destroy the NAT gateways associated with the VPC
+5. Destroy the EFS
+6. Destroy the VPC (this should delete associated subnets and elastic network interfaces)
+7. Destroy the AWS resource group
+8. Destroy the ECR repository 
