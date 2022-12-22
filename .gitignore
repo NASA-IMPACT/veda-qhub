@@ -6,4 +6,12 @@ terraform.tfstate.backup
 
 # python
 __pycache__
+
+# qhub
+image/
 stages/
+*-config.yaml
+!example-config.yaml
+
+# github
+.github/
