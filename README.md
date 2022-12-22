@@ -47,3 +47,7 @@ If this doesn't work, you can find in AWS the following resources which should b
 6. Destroy the VPC (this should delete associated subnets and elastic network interfaces)
 7. Destroy the AWS resource group
 8. Destroy the ECR repository 
+
+# License
+This project is licensed under **Apache 2**, see the [LICENSE](LICENSE) file for more details.
+

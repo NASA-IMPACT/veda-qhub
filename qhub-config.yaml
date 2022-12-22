@@ -3,7 +3,7 @@ provider: aws
 domain: veda-analytics.delta-backend.com
 certificate:
   type: lets-encrypt
-  acme_email: alexbush@developmentseed.org
+  acme_email: aimee@developmentseed.org
   acme_server: https://acme-v02.api.letsencrypt.org/directory
 security:
   authentication:
@@ -14,9 +14,9 @@ security:
   keycloak:
     initial_root_password: <NOPE>
 default_images:
-  jupyterhub: quansight/qhub-jupyterhub:v0.4.3
-  jupyterlab: quansight/qhub-jupyterlab:v0.4.3
-  dask_worker: quansight/qhub-dask-worker:v0.4.3
+  jupyterhub: quay.io/nebari/nebari-jupyterhub:v0.4.5
+  jupyterlab: quay.io/nebari/nebari-jupyterlab:v0.4.5
+  dask_worker: quay.io/nebari/nebari-dask-worker:v0.4.5
 storage:
   conda_store: 200Gi
   shared_filesystem: 200Gi
@@ -32,7 +32,7 @@ theme:
     text_color: '#5d7fb9'
     h1_color: '#5d7fb9'
     h2_color: '#5d7fb9'
-    version: v0.4.3
+    version: v0.4.5
 helm_extensions: []
 monitoring:
   enabled: true
@@ -51,7 +51,7 @@ ci_cd:
 terraform_state:
   type: remote
 namespace: dev
-qhub_version: 0.4.3
+qhub_version: 0.4.5
 amazon_web_services:
   region: us-west-2
   kubernetes_version: '1.23'
@@ -68,19 +68,6 @@ amazon_web_services:
       instance: m5.xlarge
       min_nodes: 1
       max_nodes: 5
-jupyterhub:
-  overrides:
-    singleuser:
-      lifecycleHooks:
-        postStart:
-          exec:
-            command:
-              [
-                "gitpuller",
-                "https://github.com/NASA-IMPACT/veda-documentation",
-                "master",
-                "docs",
-             ]
 profiles:
   jupyterlab:
   - display_name: Small Instance
@@ -117,11 +104,10 @@ environments:
     channels:
     - conda-forge
     dependencies:
-    - nbgitpuller
     - python
     - ipykernel
     - ipywidgets
-    - qhub-dask ==0.4.3
+    - qhub-dask==0.4.5
     - python-graphviz
     - numpy
     - numba
@@ -137,12 +123,42 @@ environments:
     - python==3.9.7
     - ipykernel==6.4.1
     - ipywidgets==7.6.5
-    - qhub-dask==0.4.3
+    - qhub-dask==0.4.5
     - param==1.11.1
     - python-graphviz==0.17
     - matplotlib==3.4.3
     - panel==0.12.7
     - voila==0.3.5
-    - streamlit==1.0.0
     - dash==2.0.0
     - cdsdashboards-singleuser==0.6.1
+  environment-veda.yaml:
+    name: veda
+    channels:
+    - conda-forge
+    dependencies:
+    - python==3.9.7
+    - ipykernel==6.4.1
+    - ipywidgets==7.6.5
+    - qhub-dask==0.4.5
+    - param==1.11.1
+    - python-graphviz==0.17
+    - matplotlib==3.4.3
+    - panel==0.12.7
+    - voila==0.3.5
+    - dash==2.0.0
+    - sphinx>=1.4
+    - pandoc
+    - nbconvert
+    - ipyleaflet
+    - matplotlib
+    - nbsphinx
+    - rioxarray
+    - pystac-client
+    - sphinxcontrib-napoleon
+    - stackstac
+    - folium
+    - selenium
+    - Pillow
+    - pydantic==1.9.1
+    - boto3==1.24.15
+    - boto3-stubs[cognito-idp,cognito-identity]
